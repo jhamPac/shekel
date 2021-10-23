@@ -1,0 +1,23 @@
+{
+    "name": "shekel",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {},
+    "devDependencies": {
+        "prettier": "^2.4.1"
+    },
+    "prettier": {
+        "arrowParens": "avoid",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false,
+        "printWidth": 90,
+        "semi": false,
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "tabWidth": 4
+    },
+    "workspaces": [
+        "packages/*"
+    ],
+    "dependencies": {}
+}

@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+    cia:
+        build: 
+          dockerfile: Dockerfile
+          context: ./packages/cia
+        container_name: cia_svc
+        volumes:
+            - type: bind
+              source: ./packages/cia
+              target: /usr/src
+            - type: volume
+              source: cia_volume
+              target: /usr/src/node_modules
+        ports:
+            - '3000:3000'
+
+volumes:
+    cia_volume:
