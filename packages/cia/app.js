@@ -13,6 +13,6 @@ app.use(cookieParser())
 
 // routes
 var blocksRouter = require('./routes/blocks')
-app.use('/blocks/api/v1', blocksRouter)
+app.use('/api/v1/blocks', blocksRouter)
 
 module.exports = app
