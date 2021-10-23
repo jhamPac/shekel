@@ -1,2 +1,2 @@
 # Shekel 🟡
-Monorepo for the Shekel application
+Mono-repo for the Shekel application
