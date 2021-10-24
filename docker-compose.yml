@@ -17,6 +17,8 @@ services:
     ui:
         build: ./
         container_name: ui_scv
+        depends_on:
+          - cia
         volumes:
           - type: bind
             source: ./packages/ui

@@ -12,7 +12,7 @@
         "jsxBracketSameLine": false,
         "printWidth": 90,
         "semi": false,
-        "singleQuote": true,
+        "singleQuote": false,
         "trailingComma": "es5",
         "tabWidth": 4
     },
