@@ -1,5 +1,5 @@
 {
-    "name": "shekel",
+    "name": "@shekel/mono-repo",
     "version": "0.0.0",
     "private": true,
     "scripts": {},
