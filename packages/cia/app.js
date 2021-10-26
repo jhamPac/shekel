@@ -18,7 +18,10 @@ app.use(
 )
 
 // routes
-var blocksRouter = require("./routes/blocks")
+const blocksRouter = require("./routes/blocks")
+const assetsRouter = require("./routes/assets")
+
 app.use("/api/v1/blocks", blocksRouter)
+app.use("/api/v1/assets", assetsRouter)
 
 module.exports = app
