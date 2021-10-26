@@ -1,7 +1,7 @@
 var express = require("express")
 var router = express.Router()
 const cardano = require("../cardano/cardano.js")
-/* GET home page. */
+
 router.get("/tip", async (req, res, next) => {
     try {
         const latestBlock = await cardano.blocksLatest()
