@@ -4,9 +4,9 @@ const cardano = require("../cardano/cardano.js")
 
 router.get("/tip", async (req, res, next) => {
     try {
-        const latestBlock = await cardano.blocksLatest()
+        const result = await cardano.blocksLatest()
         res.json({
-            data: [latestBlock],
+            data: [result],
             error: false,
         })
     } catch (err) {
