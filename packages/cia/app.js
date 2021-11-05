@@ -23,5 +23,6 @@ const assetsRouter = require("./routes/assets")
 
 app.use("/api/v1/blocks", blocksRouter)
 app.use("/api/v1/assets", assetsRouter)
+app.use("/api/v1/accounts", accountsRouter)
 
 module.exports = app
