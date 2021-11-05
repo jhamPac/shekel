@@ -20,6 +20,7 @@ app.use(
 // routes
 const blocksRouter = require("./routes/blocks")
 const assetsRouter = require("./routes/assets")
+const accountsRouter = require("./routes/accounts")
 
 app.use("/api/v1/blocks", blocksRouter)
 app.use("/api/v1/assets", assetsRouter)

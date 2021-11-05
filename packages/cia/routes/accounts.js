@@ -5,9 +5,17 @@ const cardano = require("../cardano/cardano.js")
 router.get("/:stakeAddress/addresses/assets", async (req, res) => {
     const { stakeAddress } = req.params
     try {
-        const result = await cardano.accountsAddressesAssets(stakeAddress)
+        const results = await cardano.accountsAddressesAssets(stakeAddress)
+
+        let xs = []
+        results.forEach(async r => {
+            xs.push(cardano.assetsById(r.unit))
+        })
+
+        const zs = await Promise.all(xs)
+
         res.json({
-            data: [result],
+            data: zs,
             error: false,
         })
     } catch (err) {
@@ -17,3 +25,5 @@ router.get("/:stakeAddress/addresses/assets", async (req, res) => {
         })
     }
 })
+
+module.exports = router
