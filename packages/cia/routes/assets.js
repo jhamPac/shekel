@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const cardano = require("../cardano/cardano.js")
 
-router.get("/:asset/addresses", async (req, res, next) => {
+router.get("/:asset/addresses", async (req, res) => {
     const { asset } = req.params
     try {
         const result = await cardano.assetsAddresses(asset)
@@ -18,7 +18,7 @@ router.get("/:asset/addresses", async (req, res, next) => {
     }
 })
 
-router.get("/:asset/history", async (req, res, next) => {
+router.get("/:asset/history", async (req, res) => {
     const { asset } = req.params
     try {
         const result = await cardano.assetsHistory(asset)
@@ -50,7 +50,7 @@ router.get("/:asset/transactions", async (req, res) => {
     }
 })
 
-router.get("/:asset", async (req, res, next) => {
+router.get("/:asset", async (req, res) => {
     const { asset } = req.params
     try {
         const result = await cardano.assetsById(asset)
