@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import "./App.css"
 
 const App = () => {
     const [epoch, setEpoch] = useState(null)
@@ -20,10 +19,29 @@ const App = () => {
         }
     }
 
+    const getAssetsByStake = async s => {
+        try {
+            const resp = await fetch(
+                "http://localhost:3000/api/v1/accounts/" + s + "/addresses/assets"
+            )
+            const { data } = await resp.json()
+            console.log(data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const clickHandler = e => {
+        getAssetsByStake("")
+    }
+
     return (
         <div className="App">
             <h1>Cardano Inspector API</h1>
             <h2>{`Epoch: ${epoch === null ? "..." : epoch}`}</h2>
+            <div>
+                <button onChange={}>Submit</button>
+            </div>
         </div>
     )
 }
