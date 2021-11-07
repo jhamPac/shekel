@@ -8,13 +8,14 @@ const convertIPFSURL = url => {
 }
 
 const pluckIPFSpath = url => url.replace(/ipfs/g, "/").split("/").slice(-1)[0]
-const createAssetUIData = (a, c) => {
-    const { image, files, ...x } = c
-    const z = {
-        ...x,
-        imageURL: convertIPFSprotocol(image),
-    }
-    return a.concat(z)
+
+const createAssetUIData = (acc, x) => {
+    const { image, files, ...y } = x
+
+    return acc.concat({
+        ...y,
+        imageURL: convertIPFSURL(image),
+    })
 }
 
 router.get("/:stakeAddress/addresses/assets", async (req, res) => {
@@ -30,7 +31,7 @@ router.get("/:stakeAddress/addresses/assets", async (req, res) => {
 
         const ys = await Promise.all(xs)
 
-        const zs = ys.map(d => d.onchain_metadata).reduce()
+        const zs = ys.map(d => d.onchain_metadata).reduce(createAssetUIData, [])
 
         res.json({
             data: zs,
