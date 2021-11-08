@@ -2,10 +2,10 @@ const express = require("express")
 const router = express.Router()
 const cardano = require("../cardano/cardano.js")
 
-router.get("/:asset/addresses", async (req, res) => {
-    const { asset } = req.params
+router.get("/addresses", async (req, res) => {
+    const { assetID } = req.query
     try {
-        const result = await cardano.assetsAddresses(asset)
+        const result = await cardano.assetsAddresses(assetID)
         res.json({
             data: [result],
             error: false,
@@ -18,10 +18,10 @@ router.get("/:asset/addresses", async (req, res) => {
     }
 })
 
-router.get("/:asset/history", async (req, res) => {
-    const { asset } = req.params
+router.get("/history", async (req, res) => {
+    const { assetID } = req.query
     try {
-        const result = await cardano.assetsHistory(asset)
+        const result = await cardano.assetsHistory(assetID)
         res.json({
             data: [result],
             error: false,
@@ -34,10 +34,10 @@ router.get("/:asset/history", async (req, res) => {
     }
 })
 
-router.get("/:asset/transactions", async (req, res) => {
-    const { asset } = req.params
+router.get("/transactions", async (req, res) => {
+    const { assetID } = req.query
     try {
-        const result = await cardano.assetsTransactions(asset)
+        const result = await cardano.assetsTransactions(assetID)
         res.json({
             data: [result],
             error: false,
@@ -50,10 +50,10 @@ router.get("/:asset/transactions", async (req, res) => {
     }
 })
 
-router.get("/:asset", async (req, res) => {
-    const { asset } = req.params
+router.get("/asset", async (req, res) => {
+    const { assetID } = req.query
     try {
-        const result = await cardano.assetsById(asset)
+        const result = await cardano.assetsById(assetID)
         res.json({
             data: [result],
             error: false,

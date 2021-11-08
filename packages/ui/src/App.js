@@ -46,6 +46,16 @@ const App = () => {
         setStakeAddress(e.target.value)
     }
 
+    const renderAssetCards = as => {
+        return (
+            <ul>
+                {as.map((a, i) => (
+                    <li key={i}>{`${a.name}`}</li>
+                ))}
+            </ul>
+        )
+    }
+
     return (
         <div className="App">
             <h1>Cardano Inspector API</h1>
@@ -56,7 +66,7 @@ const App = () => {
                     <button type="submit">Submit</button>
                 </form>
             </div>
-            <div>{assets.length > 0 ? assets.map(m => <p>{`${m.name}`}</p>) : null}</div>
+            <div>{assets.length > 0 ? renderAssetCards(assets) : null}</div>
         </div>
     )
 }
