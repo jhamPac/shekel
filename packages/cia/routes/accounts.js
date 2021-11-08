@@ -18,8 +18,8 @@ const createAssetUIData = (acc, x) => {
     })
 }
 
-router.get("/:stakeAddress/addresses/assets", async (req, res) => {
-    const { stakeAddress } = req.params
+router.get("/stake/assets", async (req, res) => {
+    const { stakeAddress } = req.query
 
     try {
         const results = await cardano.accountsAddressesAssets(stakeAddress)

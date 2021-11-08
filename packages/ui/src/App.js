@@ -21,8 +21,12 @@ const App = () => {
 
     const getAssetsByStake = async s => {
         try {
+            const p = new URLSearchParams({
+                stakeAddress: s,
+            })
+
             const resp = await fetch(
-                "http://localhost:3000/api/v1/accounts/" + s + "/addresses/assets"
+                "http://localhost:3000/api/v1/accounts/stake/assets?" + p
             )
             const { data } = await resp.json()
             console.log(data)
@@ -32,7 +36,7 @@ const App = () => {
     }
 
     const clickHandler = e => {
-        getAssetsByStake("")
+        getAssetsByStake()
     }
 
     return (
@@ -40,7 +44,7 @@ const App = () => {
             <h1>Cardano Inspector API</h1>
             <h2>{`Epoch: ${epoch === null ? "..." : epoch}`}</h2>
             <div>
-                <button onChange={}>Submit</button>
+                <button onClick={clickHandler}>Submit</button>
             </div>
         </div>
     )
