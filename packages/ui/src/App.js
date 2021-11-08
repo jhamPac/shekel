@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 
 const App = () => {
     const [epoch, setEpoch] = useState(null)
+    const [stakeAddress, setStakeAddress] = useState("")
+    const [assets, setAssets] = useState([])
 
     useEffect(() => {
         getLatestTip()
@@ -29,14 +31,19 @@ const App = () => {
                 "http://localhost:3000/api/v1/accounts/stake/assets?" + p
             )
             const { data } = await resp.json()
-            console.log(data)
+            setAssets(data)
         } catch (err) {
             console.log(err)
         }
     }
 
-    const clickHandler = e => {
-        getAssetsByStake()
+    const submitHandler = e => {
+        e.preventDefault()
+        getAssetsByStake(stakeAddress)
+    }
+
+    const changeHandler = e => {
+        setStakeAddress(e.target.value)
     }
 
     return (
@@ -44,8 +51,12 @@ const App = () => {
             <h1>Cardano Inspector API</h1>
             <h2>{`Epoch: ${epoch === null ? "..." : epoch}`}</h2>
             <div>
-                <button onClick={clickHandler}>Submit</button>
+                <form onSubmit={submitHandler}>
+                    <input type="text" value={stakeAddress} onChange={changeHandler} />
+                    <button type="submit">Submit</button>
+                </form>
             </div>
+            <div>{assets.length > 0 ? assets.map(m => <p>{`${m.name}`}</p>) : null}</div>
         </div>
     )
 }
