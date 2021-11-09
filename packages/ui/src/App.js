@@ -49,9 +49,9 @@ const App = () => {
 
     return (
         <div className="App">
-            <h1>Cardano Inspector API</h1>
+            <h1>CNFT Inspector</h1>
             <h2>{`Epoch: ${epoch === null ? "..." : epoch}`}</h2>
-            <div>
+            <div style={{ marginBottom: "32px" }}>
                 <form onSubmit={submitHandler}>
                     <input type="text" value={stakeAddress} onChange={changeHandler} />
                     <button type="submit">Submit</button>
