@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import AssetList from "./AssetList"
+import AssetList from "../AssetList"
 
-const App = () => {
+const Dashboard = () => {
     const [epoch, setEpoch] = useState(null)
     const [stakeAddress, setStakeAddress] = useState("")
     const [assets, setAssets] = useState([])
@@ -48,7 +48,7 @@ const App = () => {
     }
 
     return (
-        <div className="App">
+        <div id="dashboard">
             <h1>CNFT Inspector</h1>
             <h2>{`Epoch: ${epoch === null ? "..." : epoch}`}</h2>
             <div style={{ marginBottom: "32px" }}>
@@ -62,4 +62,4 @@ const App = () => {
     )
 }
 
-export default App
+export default Dashboard
