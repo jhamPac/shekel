@@ -47,9 +47,9 @@ const Dashboard = () => {
     }
 
     const epochText = (epoch, error, isLoading) => {
-        if (isLoading) return "Loading, one moment please..."
+        if (isLoading) return "..."
 
-        if (error) return "..."
+        if (error) return "Could not fetch latest block."
 
         if (epoch !== null) return epoch
     }
