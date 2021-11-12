@@ -21,9 +21,11 @@ app.use(
 const blocksRouter = require("./routes/blocks")
 const assetsRouter = require("./routes/assets")
 const accountsRouter = require("./routes/accounts")
+const screenshotRouter = require("./routes/screenshot")
 
 app.use("/api/v1/blocks", blocksRouter)
 app.use("/api/v1/assets", assetsRouter)
 app.use("/api/v1/accounts", accountsRouter)
+app.use("/api/v1/screenshot", screenshotRouter)
 
 module.exports = app
