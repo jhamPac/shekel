@@ -1,7 +1,8 @@
+const path = require("path")
+const { exec } = require("child_process")
 const express = require("express")
 const router = express.Router()
 const puppeteer = require("puppeteer")
-const path = require("path")
 
 router.post("/create", async (req, res, next) => {
     const { tweetId } = req.query
@@ -33,7 +34,27 @@ router.post("/create", async (req, res, next) => {
         // grab the tweet
         const tweet = await page.$('article[role="article"]')
 
+        // take the screenshot
         await tweet.screenshot({ path: path.join(__dirname, "test.png") })
+
+        // compress the image
+        exec(
+            `squoosh-cli -d ${path.join(
+                __dirname,
+                "../compressed"
+            )} --mozjpeg 90 -s _compressed ${path.join(__dirname, "test.png")}`,
+            (error, stdout, stderr) => {
+                if (error) {
+                    console.log(`error: ${error.message}`)
+                }
+
+                if (stderr) {
+                    console.log(`stderr: ${stderr}`)
+                }
+
+                console.log(`stdout: ${stdout}`)
+            }
+        )
 
         res.json({
             data: "Success",
