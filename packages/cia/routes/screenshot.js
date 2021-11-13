@@ -1,5 +1,4 @@
 const path = require("path")
-const { exec } = require("child_process")
 const express = require("express")
 const router = express.Router()
 const puppeteer = require("puppeteer")
