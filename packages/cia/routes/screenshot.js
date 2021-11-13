@@ -37,25 +37,6 @@ router.post("/create", async (req, res, next) => {
         // take the screenshot
         await tweet.screenshot({ path: path.join(__dirname, "test.png") })
 
-        // compress the image
-        exec(
-            `squoosh-cli -d ${path.join(
-                __dirname,
-                "../compressed"
-            )} --mozjpeg 90 -s _compressed ${path.join(__dirname, "test.png")}`,
-            (error, stdout, stderr) => {
-                if (error) {
-                    console.log(`error: ${error.message}`)
-                }
-
-                if (stderr) {
-                    console.log(`stderr: ${stderr}`)
-                }
-
-                console.log(`stdout: ${stdout}`)
-            }
-        )
-
         res.json({
             data: "Success",
             error: false,
