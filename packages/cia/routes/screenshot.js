@@ -3,7 +3,7 @@ const express = require("express")
 const router = express.Router()
 const puppeteer = require("puppeteer")
 
-router.post("/create", async (req, res, next) => {
+router.post("/create", async (req, res) => {
     const { tweetId } = req.query
     const twitterURL = "https://twitter.com/anyuser/status/"
     let browser
