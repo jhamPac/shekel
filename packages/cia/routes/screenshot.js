@@ -6,7 +6,7 @@ const screenshotTweet = require("../twitter/ss.js")
 router.post("/create", async (req, res) => {
     const { tweetId } = req.query
 
-    const { ok } = screenshotTweet(tweetId)
+    const { ok } = await screenshotTweet(tweetId)
 
     if (ok) {
         res.json({

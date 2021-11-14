@@ -3,7 +3,7 @@ const path = require("path")
 const puppeteer = require("puppeteer")
 const { uniqueNamesGenerator, colors, countries } = require("unique-names-generator")
 
-const screenshotTweet = tweetId => {
+const screenshotTweet = async tweetId => {
     const twitterURL = "https://twitter.com/anyuser/status/"
 
     let browser
