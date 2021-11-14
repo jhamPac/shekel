@@ -2,10 +2,12 @@ const path = require("path")
 const express = require("express")
 const router = express.Router()
 const puppeteer = require("puppeteer")
+const { uniqueNamesGenerator, colors, countries } = require("unique-names-generator")
 
 router.post("/create", async (req, res) => {
     const { tweetId } = req.query
     const twitterURL = "https://twitter.com/anyuser/status/"
+
     let browser
     let page
 
@@ -34,6 +36,10 @@ router.post("/create", async (req, res) => {
         const tweet = await page.$('article[role="article"]')
 
         // take the screenshot
+        const randomName = uniqueNamesGenerator({
+            dictionaries: [colors, countries],
+            separator: "-",
+        })
         await tweet.screenshot({ path: path.join(__dirname, "test.png") })
 
         res.json({
