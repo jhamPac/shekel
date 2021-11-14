@@ -39,8 +39,13 @@ router.post("/create", async (req, res) => {
         const randomName = uniqueNamesGenerator({
             dictionaries: [colors, countries],
             separator: "-",
+        }).toLowerCase()
+
+        const fileName = randomName + "_" + tweetId + ".jpg"
+
+        await tweet.screenshot({
+            path: path.join(__dirname, "../screenshots/" + fileName),
         })
-        await tweet.screenshot({ path: path.join(__dirname, "test.png") })
 
         res.json({
             data: "Success",
