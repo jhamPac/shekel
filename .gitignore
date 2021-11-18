@@ -105,4 +105,5 @@ dist
 
 # Misc specific to project
 screenshots
+nft/
 nft_meta.json
