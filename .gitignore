@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Misc specific to project
+screenshots
+nft/
+nft_meta.json
