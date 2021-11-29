@@ -1626,6 +1626,7 @@
     "express" "~4.16.1"
     "morgan" "~1.9.1"
     "puppeteer" "^11.0.0"
+    "unique-names-generator" "^4.6.0"
 
 "@shekel/ui@file:/Users/kcloud/javascript/shekel/packages/ui":
   "resolved" "file:packages/ui"
