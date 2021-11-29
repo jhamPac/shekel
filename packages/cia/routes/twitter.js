@@ -3,7 +3,7 @@ const router = express.Router()
 
 const screenshotTweet = require("../twitter/ss.js")
 
-router.post("/create", async (req, res) => {
+router.post("/screenshot/create", async (req, res) => {
     const { tweetId } = req.query
 
     const { ok } = await screenshotTweet(tweetId)
