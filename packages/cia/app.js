@@ -1,28 +1,13 @@
 require("dotenv").config()
 const express = require("express")
-const path = require("path")
 const cookieParser = require("cookie-parser")
 const logger = require("morgan")
 const cors = require("cors")
-const passport = require("passport")
-const TwitterStrategy = require("passport-twitter").Strategy
+const passport = require("./passport/setup.js")
 const session = require("express-session")
 
 // app
-var app = express()
-
-passport.use(
-    new TwitterStrategy(
-        {
-            consumerKey: process.env.TWITTER_API_KEY,
-            consumerSecret: process.env.TWITTER_API_SECRET,
-            callbackURL: "/auth/twitter/redirect",
-        },
-        () => {
-            console.log("something happened")
-        }
-    )
-)
+const app = express()
 
 app.use(passport.initialize())
 app.use(logger("dev"))
