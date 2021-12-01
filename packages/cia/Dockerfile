@@ -24,6 +24,6 @@ RUN apk update && apk add --no-cache \
     harfbuzz \
     ttf-freefont
 
-EXPOSE 3000 9000
+EXPOSE 3000
 
 CMD ["bash", "./main.sh"]

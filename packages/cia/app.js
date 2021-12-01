@@ -22,10 +22,12 @@ const blocksRouter = require("./routes/blocks")
 const assetsRouter = require("./routes/assets")
 const accountsRouter = require("./routes/accounts")
 const twitterRouter = require("./routes/twitter")
+const authRouter = require("./routes/auth")
 
 app.use("/api/v1/blocks", blocksRouter)
 app.use("/api/v1/assets", assetsRouter)
 app.use("/api/v1/accounts", accountsRouter)
 app.use("/api/v1/twitter", twitterRouter)
+app.use("/api/v1/auth", authRouter)
 
 module.exports = app
