@@ -5,6 +5,11 @@ const logger = require("morgan")
 const cors = require("cors")
 const passport = require("./passport/setup.js")
 const session = require("express-session")
+const mongoose = require("mongoose")
+
+mongoose.connect(process.env.DB_URI, () => {
+    console.log("connection success")
+})
 
 // app
 const app = express()
