@@ -21,7 +21,7 @@ passport.use(
         {
             consumerKey: process.env.TWITTER_API_KEY,
             consumerSecret: process.env.TWITTER_API_SECRET,
-            callbackURL: "/auth/twitter/redirect",
+            callbackURL: "/api/v1/auth/twitter/redirect",
         },
         async (token, tokenSecret, profile, done) => {
             const currentUser = await User.findOne({

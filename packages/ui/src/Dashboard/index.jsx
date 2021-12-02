@@ -2,7 +2,7 @@ import TwitterButton from "./TwitterButton"
 
 const Dashboard = () => {
     const login = () => {
-        fetch("http://localhost:3000/api/v1/auth/twitter")
+        window.open("http://localhost:3000/api/v1/auth/twitter", "_self")
     }
 
     return (
