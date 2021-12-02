@@ -1,10 +1,10 @@
 require("dotenv").config()
 const express = require("express")
 const cookieParser = require("cookie-parser")
+const cookieSession = require("cookie-session")
 const logger = require("morgan")
 const cors = require("cors")
 const passport = require("./passport/setup.js")
-const session = require("express-session")
 const mongoose = require("mongoose")
 
 mongoose.connect(process.env.DB_URI, () => {
@@ -14,6 +14,13 @@ mongoose.connect(process.env.DB_URI, () => {
 // app
 const app = express()
 
+app.use(
+    cookieSession({
+        name: "session",
+        keys: [process.env.COOKIE_KEY1, process.env.COOKIE_KEY2],
+        maxAge: 24 * 60 * 60 * 100,
+    })
+)
 app.use(passport.initialize())
 app.use(logger("dev"))
 app.use(express.json())
