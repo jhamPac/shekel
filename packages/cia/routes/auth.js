@@ -8,8 +8,12 @@ router.get("/twitter/login/success", (req, res) => {
     if (req.user) {
         res.json({
             user: req.user,
-            cookies: req.cookies,
             error: false,
+        })
+    } else {
+        res.json({
+            user: null,
+            error: true,
         })
     }
 })
