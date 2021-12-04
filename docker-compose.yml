@@ -42,10 +42,9 @@ services:
         ports:
             - "27017:27017"
         volumes:
-            - mongo_volume:/data/db 
+            - /data/db 
 
       
 volumes:
     cia_volume:
     ui_volume:
-    mongo_volume:
