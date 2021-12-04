@@ -12,7 +12,7 @@ passport.deserializeUser((id, done) => {
             done(null, user)
         })
         .catch(e => {
-            done(new Error("Failed to deserialize an user"))
+            done(null)
         })
 })
 
