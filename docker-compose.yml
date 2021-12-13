@@ -2,8 +2,10 @@ version: '3'
 
 services:
     cia:
-        build: ./
+        build: ./packages/cia
         container_name: cia_svc
+        depends_on:
+            - db
         volumes:
             - type: bind
               source: ./packages/cia
@@ -28,6 +30,20 @@ services:
             target: /usr/src/node_modules
         ports:
           - '9000:9000'
+          
+    db:
+        image: mongo:latest
+        container_name: mongodb
+        restart: unless-stopped
+        env_file: ./packages/cia/.env
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
+            - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+        ports:
+            - "27017:27017"
+        volumes:
+            - /data/db 
+
       
 volumes:
     cia_volume:

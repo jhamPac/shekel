@@ -1,70 +1,37 @@
 import { useEffect, useState } from "react"
 import { useQuery } from "react-query"
-import AssetList from "../AssetList"
+import TwitterButton from "./TwitterButton"
 
 const Dashboard = () => {
-    const [epoch, setEpoch] = useState(null)
-    const [stakeAddress, setStakeAddress] = useState("")
-    const [assets, setAssets] = useState([])
-    const {
-        isLoading,
-        error,
-        data: result,
-    } = useQuery("blockTip", () =>
-        fetch("http://localhost:3000/api/v1/blocks/tip").then(res => res.json())
+    const [auth, setAuth] = useState(false)
+    const [user, setUser] = useState(null)
+
+    const { isLoading, data: result } = useQuery("success-login", () =>
+        fetch("http://localhost:3000/api/v1/auth/twitter/login/success", {
+            credentials: "include",
+        }).then(res => res.json())
     )
 
     useEffect(() => {
-        if (result && result.data.length > 0) {
-            const block = result.data[0]
-            setEpoch(block.epoch)
+        if (result && result.error === false) {
+            setAuth(true)
+            setUser(result.user)
+        } else {
+            setAuth(false)
         }
     }, [result])
 
-    const getAssetsByStake = async s => {
-        try {
-            const p = new URLSearchParams({
-                stakeAddress: s,
-            })
-
-            const resp = await fetch(
-                "http://localhost:3000/api/v1/accounts/stake/assets?" + p
-            )
-            const { data } = await resp.json()
-            setAssets(data)
-        } catch (err) {
-            console.log(err)
-        }
+    const login = () => {
+        window.open("http://localhost:3000/api/v1/auth/twitter", "_self")
     }
 
-    const submitHandler = e => {
-        e.preventDefault()
-        getAssetsByStake(stakeAddress)
-    }
-
-    const changeHandler = e => {
-        setStakeAddress(e.target.value)
-    }
-
-    const epochText = (epoch, error, isLoading) => {
-        if (isLoading) return "..."
-
-        if (error) return "Could not fetch latest block."
-
-        if (epoch !== null) return epoch
-    }
-
-    return (
-        <div id="dashboard">
-            <h1>CNFT Inspector</h1>
-            <h2>{`Epoch: ${epochText(epoch, error, isLoading)}`}</h2>
-            <div style={{ marginBottom: "32px" }}>
-                <form onSubmit={submitHandler}>
-                    <input type="text" value={stakeAddress} onChange={changeHandler} />
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
-            <div>{assets.length > 0 ? <AssetList list={assets} /> : null}</div>
+    return isLoading ? (
+        <p>Loading...</p>
+    ) : (
+        <div>
+            <h1>CNFT Sweets 🍬</h1>
+            <div>{user === null ? null : <p>{`Hello: ${user.handle}`}</p>}</div>
+            {auth ? null : <TwitterButton clickHandler={login} />}
         </div>
     )
 }

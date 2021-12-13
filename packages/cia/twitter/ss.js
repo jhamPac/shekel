@@ -12,8 +12,14 @@ const screenshotTweet = async tweetId => {
     try {
         // set up a headless browser
         browser = await puppeteer.launch({
+            executablePath: "/usr/bin/chromium-browser",
             headless: true,
-            args: ["--disable-notifications"],
+            args: [
+                "--disable-notifications",
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-gpu",
+            ],
         })
 
         // creates a tab

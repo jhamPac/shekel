@@ -6,6 +6,6 @@ COPY . ./
 
 RUN apk update && apk add gcc autoconf automake libtool dpkg pkgconfig libpng libpng-dev g++ nasm make bash
 
-EXPOSE 3000 9000
+EXPOSE 9000
 
 CMD ["bash", "./main.sh"]
