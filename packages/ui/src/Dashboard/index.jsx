@@ -28,9 +28,19 @@ const Dashboard = () => {
 
     const changeHandler = e => setValue(e.target.value)
 
-    const submitHandler = e => {
+    const submitHandler = async e => {
         e.preventDefault()
-        console.log(value)
+
+        try {
+            const result = await fetch(
+                `http://localhost:3000/api/v1/twitter/search?userId=${user.twitterId}&tweetId=${value}`
+            )
+            const data = await result.json()
+
+            console.log(data)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     return isLoading ? (
@@ -46,7 +56,11 @@ const Dashboard = () => {
                         <p>Search for your own tweets</p>
                         <input type="text" value={value} onChange={changeHandler} />
 
-                        <input type="submit" value="Submit" />
+                        <input
+                            type="submit"
+                            value="Submit"
+                            disabled={value === "" ? true : false}
+                        />
                     </form>
                 </div>
             )}

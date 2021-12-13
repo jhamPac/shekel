@@ -21,4 +21,15 @@ router.post("/screenshot/create", async (req, res) => {
     }
 })
 
+router.get("/search", async (req, res) => {
+    const { userId, tweetId } = req.query
+
+    console.log(userId, tweetId)
+
+    res.json({
+        data: "Success",
+        error: false,
+    })
+})
+
 module.exports = router
