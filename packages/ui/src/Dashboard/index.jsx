@@ -6,6 +6,8 @@ const Dashboard = () => {
     const [auth, setAuth] = useState(false)
     const [user, setUser] = useState(null)
     const [value, setValue] = useState("")
+    const [tweet, setTweet] = useState(null)
+    const [searchError, setSearchError] = useState(false)
 
     const { isLoading, data: result } = useQuery("success-login", () =>
         fetch("http://localhost:3000/api/v1/auth/twitter/login/success", {
@@ -34,12 +36,12 @@ const Dashboard = () => {
         try {
             const result = await fetch(
                 `http://localhost:3000/api/v1/twitter/search?userId=${user.twitterId}&tweetId=${value}`
-            )
-            const data = await result.json()
+            ).then(r => r.json())
 
-            console.log(data)
+            setTweet(result.data)
+            setSearchError(false)
         } catch (e) {
-            console.log(e)
+            setSearchError(true)
         }
     }
 
@@ -62,6 +64,21 @@ const Dashboard = () => {
                             disabled={value === "" ? true : false}
                         />
                     </form>
+                </div>
+            )}
+            {tweet === null ? null : (
+                <div>
+                    {tweet.ownsTweet ? (
+                        <div>
+                            <p>Your tweet:</p>
+                            <p>{`${tweet.text}`}</p>
+                        </div>
+                    ) : (
+                        <p>
+                            Sorry you do not appear to own that tweet. Please double check
+                            the tweet ID.
+                        </p>
+                    )}
                 </div>
             )}
         </div>

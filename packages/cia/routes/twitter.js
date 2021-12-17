@@ -32,14 +32,20 @@ router.get("/search", async (req, res) => {
 
         const ownsTweet = userId === tweet.includes.users[0].id
 
+        const data = ownsTweet ? { ...tweet.data, ownsTweet: true } : { ownsTweet: false }
+
         res.json({
-            data: ownsTweet,
+            data: {
+                ...data,
+            },
             error: false,
         })
     } catch (e) {
         res.json({
-            data: false,
-            error: true,
+            data: {
+                ownsTweet: false,
+                error: true,
+            },
         })
     }
 })
