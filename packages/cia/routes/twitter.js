@@ -1,6 +1,9 @@
 const express = require("express")
 const router = express.Router()
 
+const { TwitterApi } = require("twitter-api-v2")
+const appOnly = new TwitterApi(process.env.TWITTER_BEARER_TOKEN)
+
 const screenshotTweet = require("../twitter/ss.js")
 
 router.post("/screenshot/create", async (req, res) => {
@@ -24,12 +27,23 @@ router.post("/screenshot/create", async (req, res) => {
 router.get("/search", async (req, res) => {
     const { userId, tweetId } = req.query
 
-    console.log(userId, tweetId)
+    try {
+        const tweet = await appOnly.v2.singleTweet(tweetId, {
+            expansions: ["author_id"],
+        })
 
-    res.json({
-        data: "Success",
-        error: false,
-    })
+        const ownsTweet = userId === tweet.includes.users[0].id
+
+        res.json({
+            data: ownsTweet,
+            error: false,
+        })
+    } catch (e) {
+        res.json({
+            data: false,
+            error: true,
+        })
+    }
 })
 
 module.exports = router
